@@ -1,16 +1,48 @@
-import React, { Component } from "react";
-import "./App.css";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchSmurfs, addSmurf } from '../store/actions';
+
+import Smurf from './Smurf';
+import AddSmurf from './AddSmurf';
+
+import './App.css';
+import smurflogo from '../images/smurfslogo.png';
+
 class App extends Component {
+  componentDidMount() {
+    this.props.fetchSmurfs();
+  }
+
   render() {
     return (
-      <div className="App">
-        <h1>SMURFS! W/Redux</h1>
-        <div>Welcome to your state management version of Smurfs!</div>
-        <div>Start inside of your `src/index.js` file!</div>
-        <div>Have fun!</div>
+      <div className='App'>
+        {console.log(this.props.smurfs)}
+        <img src={smurflogo} alt='the smurfs' />
+        <div className='smurfForm'>
+          <AddSmurf addSmurf={this.props.addSmurf} />
+        </div>
+        <div className='loading'>
+          {this.props.isLoading ? 'Loading ...' : null}
+        </div>
+        <div className='error'>
+          {this.props.error ? this.props.error : null}
+        </div>
+        <div className='smurfs'>
+          {this.props.smurfs.map(smurf => (
+            <Smurf key={smurf.id} smurf={smurf} />
+          ))}
+        </div>
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    smurfs: state.smurfs,
+    isLoading: state.isLoading,
+    error: state.error,
+  };
+};
+
+export default connect(mapStateToProps, { fetchSmurfs, addSmurf })(App);
