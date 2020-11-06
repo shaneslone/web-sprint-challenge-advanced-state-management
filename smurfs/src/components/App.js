@@ -6,6 +6,8 @@ import Smurf from './Smurf';
 import AddSmurf from './AddSmurf';
 
 import './App.css';
+import smurflogo from '../images/smurfslogo.png';
+
 class App extends Component {
   componentDidMount() {
     this.props.fetchSmurfs();
@@ -15,14 +17,15 @@ class App extends Component {
     return (
       <div className='App'>
         {console.log(this.props.smurfs)}
-        <h1>SMURFS! W/Redux</h1>
-        <div>Welcome to your state management version of Smurfs!</div>
-        <div>Start inside of your `src/index.js` file!</div>
-        <div>Have fun!</div>
-        <AddSmurf addSmurf={this.props.addSmurf} />
-        {this.props.smurfs.map(smurf => (
-          <Smurf smurf={smurf} />
-        ))}
+        <img src={smurflogo} alt='the smurfs' />
+        <div className='smurfForm'>
+          <AddSmurf addSmurf={this.props.addSmurf} />
+        </div>
+        <div className='smurfs'>
+          {this.props.smurfs.map(smurf => (
+            <Smurf key={smurf.id} smurf={smurf} />
+          ))}
+        </div>
       </div>
     );
   }

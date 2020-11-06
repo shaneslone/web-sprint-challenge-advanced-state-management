@@ -11,6 +11,8 @@ export default function AddSmurf(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
+    props.addSmurf(values);
+    clearForm(e);
   };
 
   return (
@@ -18,7 +20,7 @@ export default function AddSmurf(props) {
       <form>
         <div>
           <label>
-            Name:
+            <span>Name:</span>
             <input
               name='name'
               type='text'
@@ -29,7 +31,7 @@ export default function AddSmurf(props) {
         </div>
         <div>
           <label>
-            Age:
+            <span>Age:</span>
             <input
               name='age'
               type='number'
@@ -40,7 +42,7 @@ export default function AddSmurf(props) {
         </div>
         <div>
           <label>
-            Height:
+            <span>Height:</span>
             <input
               name='height'
               type='text'

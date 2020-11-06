@@ -23,6 +23,8 @@ export const reducer = (state = initialState, action) => {
       };
     case NETWORK_ERROR:
       return { ...state, error: action.payload };
+    case ADD_SMURF_SUCESS:
+      return { ...state, smurfs: action.payload };
     default:
       return state;
   }
