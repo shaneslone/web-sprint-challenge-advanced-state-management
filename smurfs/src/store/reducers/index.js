@@ -22,7 +22,7 @@ export const reducer = (state = initialState, action) => {
         isLoading: false,
       };
     case NETWORK_ERROR:
-      return { ...state, error: action.payload };
+      return { ...state, isLoading: false, error: action.payload };
     case ADD_SMURF_SUCESS:
       return { ...state, smurfs: action.payload };
     default:

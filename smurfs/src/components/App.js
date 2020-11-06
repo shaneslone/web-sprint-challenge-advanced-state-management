@@ -21,6 +21,12 @@ class App extends Component {
         <div className='smurfForm'>
           <AddSmurf addSmurf={this.props.addSmurf} />
         </div>
+        <div className='loading'>
+          {this.props.isLoading ? 'Loading ...' : null}
+        </div>
+        <div className='error'>
+          {this.props.error ? this.props.error : null}
+        </div>
         <div className='smurfs'>
           {this.props.smurfs.map(smurf => (
             <Smurf key={smurf.id} smurf={smurf} />
@@ -35,6 +41,7 @@ const mapStateToProps = state => {
   return {
     smurfs: state.smurfs,
     isLoading: state.isLoading,
+    error: state.error,
   };
 };
 
